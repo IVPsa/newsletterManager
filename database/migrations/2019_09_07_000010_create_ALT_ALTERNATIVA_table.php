@@ -23,16 +23,18 @@ class CreateAltAlternativaTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('ALT_COD');
-            $table->integer('ALT_PR_COD');
+            $table->integer('ALT_PR_COD')->unsigned();
             $table->string('ALT_DESCRIPCION', 45);
 
-            $table->index(["ALT_PR_COD"], 'fk_ALT_ALTERNATIVA_PR_PREGUNTA1_idx');
 
 
-            $table->foreign('ALT_PR_COD', 'fk_ALT_ALTERNATIVA_PR_PREGUNTA1_idx')
+
+            $table->foreign('ALT_PR_COD')
                 ->references('PR_COD')->on('PR_PREGUNTA')
                 ->onDelete('no action')
                 ->onUpdate('no action');
+
+            $table->timestamps();
         });
     }
 

@@ -24,6 +24,7 @@ class CreateCmContenudoMultimediaTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('CM_COD');
             $table->text('CM_URL');
+            $table->timestamps();
         });
     }
 

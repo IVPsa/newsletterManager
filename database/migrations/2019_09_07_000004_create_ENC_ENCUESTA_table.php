@@ -26,6 +26,7 @@ class CreateEncEncuestaTable extends Migration
             $table->string('ENC_ESTADO', 45);
             $table->string('ENC_NOMBRE', 45);
             $table->date('ENC_FECHA');
+            $table->timestamps();
         });
     }
 

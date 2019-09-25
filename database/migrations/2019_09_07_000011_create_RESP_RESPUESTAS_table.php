@@ -22,15 +22,14 @@ class CreateRespRespuestasTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->unsignedBigInteger('RESP_id');
-            $table->integer('RESP_ALT_COD');
 
-            $table->index(["RESP_ALT_COD"], 'fk_RESP_RESPUESTAS_ALT_ALTERNATIVA1_idx');
+            $table->increments('RESP_COD');
 
-            $table->index(["RESP_id"], 'fk_RESP_RESPUESTA_USU_USUARIO1_idx');
+            $table->integer('RESP_ALT_COD')->unsigned();
+            $table->unsignedBigInteger('RESP_USUARIO_id')->unsigned();
 
 
-            $table->foreign('RESP_id')
+            $table->foreign('RESP_USUARIO_id')
                 ->references('id')->on('users')
                 ->onDelete('no action')
                 ->onUpdate('no action');
@@ -39,6 +38,7 @@ class CreateRespRespuestasTable extends Migration
                 ->references('ALT_COD')->on('ALT_ALTERNATIVA')
                 ->onDelete('no action')
                 ->onUpdate('no action');
+            $table->timestamps();
         });
     }
 

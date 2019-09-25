@@ -23,7 +23,7 @@ class CreateEveEventosTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('EVE_COD');
-            $table->string('EVE_ESTADO', 45);
+
             $table->string('EVE_NOMBRE');
             $table->dateTime('EVE_INICIO');
             $table->dateTime('EVE_FIN');
@@ -31,26 +31,26 @@ class CreateEveEventosTable extends Migration
             $table->decimal('EVE_LONGITUD');
             $table->text('EVE_DESCRIPCION');
             $table->string('EVE_UBICACION');
-            $table->integer('EVE_COM_COD');
             $table->string('EVE_ESTADO', 45);
-            $table->unsignedInteger('EVE_id');
             $table->text('EVE_URL_FOTO');
             $table->text('EVE_URL_VIDEO');
 
-            $table->index(["EVE_COM_COD"], 'fk_EVE_EVENTOS_COM_COMUNA_idx');
+            $table->integer('EVE_COM_COD')->unsigned();
 
-            $table->index(["EVE_id"], 'fk_EVE_EVENTOS_USU_USUARIO1_idx');
+            $table->unsignedBigInteger('EVE_id');
 
 
-            $table->foreign('EVE_COM_COD', 'fk_EVE_EVENTOS_COM_COMUNA_idx')
+            $table->foreign('EVE_COM_COD')
                 ->references('COM_COD')->on('COM_COMUNA')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
-            $table->foreign('EVE_id', 'fk_EVE_EVENTOS_USU_USUARIO1_idx')
-                ->references('id')->on('USU_USUARIO')
+            $table->foreign('EVE_id')
+                ->references('id')->on('users')
                 ->onDelete('no action')
                 ->onUpdate('no action');
+
+            $table->timestamps();
         });
     }
 

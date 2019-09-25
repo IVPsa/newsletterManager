@@ -25,15 +25,16 @@ class CreatePrPreguntaTable extends Migration
             $table->increments('PR_COD');
             $table->string('PR_NUM', 45);
             $table->text('PR_DETALLE');
-            $table->integer('PR_ENC_COD');
-
-            $table->index(["PR_ENC_COD"], 'fk_PR_PREGUNTA_ENC_ENCUESTA1_idx');
 
 
-            $table->foreign('PR_ENC_COD', 'fk_PR_PREGUNTA_ENC_ENCUESTA1_idx')
+            $table->integer('PR_ENC_COD')->unsigned();
+
+
+            $table->foreign('PR_ENC_COD')
                 ->references('ENC_COD')->on('ENC_ENCUESTA')
                 ->onDelete('no action')
                 ->onUpdate('no action');
+            $table->timestamps();
         });
     }
 

@@ -24,6 +24,7 @@ class CreateTnTipoNoticiaTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('TN_COD');
             $table->string('TN_DESCRIPCION', 45);
+            $table->timestamps();
         });
     }
 

@@ -26,34 +26,37 @@ class CreateNotNoticiaTable extends Migration
             $table->string('NOT_TITULO', 45);
             $table->date('NOT_FECHA');
             $table->text('NOT_CUERPO');
-            $table->integer('NOT_COM_COD');
+
             $table->string('NOT_ESTADO', 45);
-            $table->unsignedBigInteger('NOT_USUARIO_id');
+
             $table->text('NOT_URL_FOTO');
             $table->text('NOT_URL_VIDEO');
-            $table->integer('NOT_TN_COD');
-
-            $table->index(["NOT_TN_COD"], 'fk_NOT_NOTICIA_TN_TIPO_NOTICIA1_idx');
-
-            $table->index(["NOT_COM_COD"], 'fk_NOT_NOTICIA_COM_COMUNA1_idx');
-
-            $table->index(["NOT_USUARIO_id"], 'fk_NOT_NOTICIA_USU_USUARIO1_idx');
 
 
-            $table->foreign('NOT_COM_COD', 'fk_NOT_NOTICIA_COM_COMUNA1_idx')
+            $table->integer('NOT_TN_COD')->unsigned();
+
+            $table->integer('NOT_COM_COD')->unsigned();
+
+            $table->unsignedBigInteger('NOT_USUARIO_id')->unsigned();
+
+
+            $table->foreign('NOT_USUARIO_id')
+                ->references('id')->on('users')
+                ->onDelete('no action')
+                ->onUpdate('no action');
+
+            $table->foreign('NOT_COM_COD')
                 ->references('COM_COD')->on('COM_COMUNA')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
-            $table->foreign('NOT_USUARIO_id', 'fk_NOT_NOTICIA_USU_USUARIO1_idx')
-                ->references('id')->on('USU_USUARIO')
-                ->onDelete('no action')
-                ->onUpdate('no action');
 
-            $table->foreign('NOT_TN_COD', 'fk_NOT_NOTICIA_TN_TIPO_NOTICIA1_idx')
+            $table->foreign('NOT_TN_COD')
                 ->references('TN_COD')->on('TN_TIPO_NOTICIA')
                 ->onDelete('no action')
                 ->onUpdate('no action');
+
+            $table->timestamps();
         });
     }
 

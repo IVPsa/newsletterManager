@@ -24,6 +24,7 @@ class CreateComComunaTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('COM_COD');
             $table->string('COM_DES', 45);
+            $table->timestamps();
         });
     }
 
