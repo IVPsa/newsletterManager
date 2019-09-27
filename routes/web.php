@@ -43,5 +43,22 @@ Route::group(['prefix'=>'Noticias'],function () {
 //FIN RUTAS NOTICIAS
 
 //RUTAS EVENTOS
+Route::group(['prefix'=>'Eventos'],function () {
 
+  Route::get('/indexEventos', [
+    'uses' => 'eventosController@indexEventos',
+  ])->name('indexNoticias');
+
+  Route::get('/fichaEventos', [
+    'uses' => 'eventosController@fichaEventos',
+  ])->name('fichaNoticia');
+
+  Route::get('/listadoDeEventos', [
+    'uses' => 'eventosController@listadoDeEventos',
+  ])->name('listadoDeNoticias');
+
+  Route::get('/formularioCrearEventos', [
+    'uses' => 'eventosController@formularioCrearEventos',
+  ])->name('formularioCrearNoticia');
+});
 //FIN RUTAS EVENTOS
